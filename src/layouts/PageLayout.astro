@@ -1,0 +1,135 @@
+---
+// src/layouts/PageLayout.astro
+// Shared shell for non-docs pages (home, pricing, about, feedback, tools).
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const { title = 'RedGreen Studio', description = 'RedGreen Studio — simple, private, client-side developer tools.' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" />
+    <script is:inline>
+      (() => {
+        const storageKey = 'redgreen-theme';
+        const isTheme = (value) => value === 'light' || value === 'dark';
+        try {
+          const storedTheme = localStorage.getItem(storageKey);
+          const preferredTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          document.documentElement.dataset.theme = isTheme(storedTheme) ? storedTheme : preferredTheme;
+        } catch (error) {
+          console.warn('Could not read theme preference.', error);
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+    <style is:global>
+      :root {
+        color-scheme: dark;
+        --background: #0a0a0a;
+        --foreground: #ededed;
+        --border: #262626;
+        --muted: #171717;
+        --muted-foreground: #a3a3a3;
+        --gray-7: #171717;
+        --surface: #111111;
+        --input: #171717;
+        --shadow: rgba(0, 0, 0, 0.4);
+        --green: #16a34a;
+        --red: #dc2626;
+        --button-foreground: #06170c;
+        --accent-blue: #3b82f6;
+        --accent-blue-foreground: #ffffff;
+        --diff-progress-bg: #1e3a8a;
+        --editor-divider: #2f3a4a;
+        --editor-dot: #94a3b8;
+        --danger: #f87171;
+        --diff-output-bg: #111111;
+        --diff-output-header-bg: #171717;
+        --diff-output-border: #333333;
+        --diff-output-line-bg: #0f0f0f;
+        --diff-output-muted-bg: #1f2937;
+        --diff-output-ins-bg: rgba(22, 163, 74, 0.22);
+        --diff-output-del-bg: rgba(220, 38, 38, 0.22);
+        --diff-output-ins-text: #bbf7d0;
+        --diff-output-del-text: #fecaca;
+      }
+
+      :root[data-theme='light'] {
+        color-scheme: light;
+        --background: #ffffff;
+        --foreground: #171717;
+        --border: #d4d4d4;
+        --muted: #f5f5f5;
+        --muted-foreground: #525252;
+        --gray-7: #ffffff;
+        --surface: #ffffff;
+        --input: #ffffff;
+        --shadow: rgba(15, 23, 42, 0.12);
+        --green: #15803d;
+        --red: #b91c1c;
+        --button-foreground: #ffffff;
+        --accent-blue: #2563eb;
+        --accent-blue-foreground: #ffffff;
+        --diff-progress-bg: #dbeafe;
+        --editor-divider: #e2e8f0;
+        --editor-dot: #64748b;
+        --danger: #b91c1c;
+        --diff-output-bg: #ffffff;
+        --diff-output-header-bg: #f8fafc;
+        --diff-output-border: #d4d4d4;
+        --diff-output-line-bg: #ffffff;
+        --diff-output-muted-bg: #f1f5f9;
+        --diff-output-ins-bg: #dcfce7;
+        --diff-output-del-bg: #fee2e2;
+        --diff-output-ins-text: #14532d;
+        --diff-output-del-text: #7f1d1d;
+      }
+
+      :root[data-theme='dark'] {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--background);
+        color: var(--foreground);
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      }
+
+      body {
+        transition: background-color 0.15s ease, color 0.15s ease;
+      }
+
+      .page-shell {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page-main {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <SiteHeader />
+      <main class="page-main">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

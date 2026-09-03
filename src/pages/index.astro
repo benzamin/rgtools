@@ -1,0 +1,163 @@
+---
+// src/pages/index.astro
+import PageLayout from '../layouts/PageLayout.astro';
+
+const apps = [
+  {
+    title: 'JSON Viewer',
+    description: 'View, validate and modify JSON with a fast, interactive tree editor. Format, search, and fold nested data — all client-side.',
+    href: '/json-viewer/',
+    cta: 'Open JSON Viewer',
+    accent: 'green',
+  },
+  {
+    title: 'Diff Finder',
+    description: 'Find text and JSON differences side-by-side and export the results as a PDF. No data ever leaves your browser.',
+    href: '/diff-finder/',
+    cta: 'Open Diff Finder',
+    accent: 'red',
+  },
+];
+---
+
+<PageLayout title="RedGreen Studio | Simple, private developer tools" description="Free, client-side developer tools: a JSON viewer/editor and a text diff finder with PDF export.">
+  <section class="hero">
+    <h1>Small tools. <span class="accent-green">Zero</span> <span class="accent-red">friction</span>.</h1>
+    <p class="subtitle">RedGreen Studio builds tiny, focused web apps that run entirely in your browser — fast, free, and private by default.</p>
+    <div class="hero-actions">
+      <a href="/json-viewer/" class="btn btn-primary">Try JSON Viewer</a>
+      <a href="/diff-finder/" class="btn btn-secondary">Try Diff Finder</a>
+    </div>
+  </section>
+
+  <section class="apps">
+    <h2>Our Apps</h2>
+    <div class="card-grid">
+      {apps.map((app) => (
+        <a class={`card card-${app.accent}`} href={app.href}>
+          <h3>{app.title}</h3>
+          <p>{app.description}</p>
+          <span class="card-cta">{app.cta} &rarr;</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .hero {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 3.5rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.25rem;
+  }
+
+  .accent-green { color: var(--green); }
+  .accent-red { color: var(--red); }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--muted-foreground);
+    line-height: 1.6;
+    margin: 0 auto 2rem;
+    max-width: 560px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.15s ease;
+  }
+
+  .btn:hover {
+    opacity: 0.85;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: var(--button-foreground);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--foreground);
+    border: 1px solid var(--border);
+  }
+
+  .apps {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 5rem;
+  }
+
+  .apps h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.75rem;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--muted);
+    text-decoration: none;
+    color: var(--foreground);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+  }
+
+  .card-green:hover { border-color: var(--green); }
+  .card-red:hover { border-color: var(--red); }
+
+  .card h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .card p {
+    margin: 0;
+    color: var(--muted-foreground);
+    line-height: 1.55;
+    font-size: 0.94rem;
+  }
+
+  .card-cta {
+    margin-top: auto;
+    font-weight: 600;
+    font-size: 0.88rem;
+  }
+
+  .card-green .card-cta { color: var(--green); }
+  .card-red .card-cta { color: var(--red); }
+</style>

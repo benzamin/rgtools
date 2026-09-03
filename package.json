@@ -1,0 +1,26 @@
+{
+  "name": "astro-starlight",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/preact": "^6.0.4",
+    "@astrojs/starlight": "^0.41.7",
+    "astro": "^7.1.6",
+    "diff": "^9.0.0",
+    "diff2html": "^3.4.56",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
+    "preact": "^10.29.8",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.3",
+    "starlight-theme-black": "^0.7.1",
+    "vanilla-jsoneditor": "^3.13.0"
+  }
+}

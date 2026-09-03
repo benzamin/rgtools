@@ -1,0 +1,35 @@
+---
+// src/pages/json-viewer/index.astro
+import PageLayout from '../../layouts/PageLayout.astro';
+import JsonEditor from '../../components/JsonEditor.jsx';
+---
+
+<PageLayout title="Online JSON Viewer & Editor | Client-Side Tool" description="View, edit, fold, format, and validate JSON data in a interactive tree view right in your browser. 100% private and client-side.">
+  <div class="json-page">
+    <main class="json-main">
+      {/* Astro hydrates the editor component on page load */}
+      <JsonEditor client:load />
+    </main>
+  </div>
+</PageLayout>
+
+<style>
+  .json-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+    box-sizing: border-box;
+    height: calc(100dvh - 56px - 44px);
+  }
+
+  .json-main {
+    height: 100%;
+    min-height: 0;
+  }
+
+  /* Custom theme adjustments for vanilla-jsoneditor container */
+  .json-main :global(.jse-main) {
+    font-family: monospace;
+    height: 100%;
+  }
+</style>

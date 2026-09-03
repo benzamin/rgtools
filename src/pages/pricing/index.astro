@@ -1,0 +1,189 @@
+---
+// src/pages/pricing/index.astro
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const plans = [
+  {
+    name: 'Free',
+    price: '$0',
+    period: 'forever',
+    description: 'Everything you need to view, edit and diff JSON or text in your browser.',
+    features: [
+      'Unlimited JSON viewing & editing',
+      'Unlimited text & JSON diffing',
+      'Export diffs as PDF',
+      '100% client-side — your data never leaves your device',
+    ],
+    cta: 'Start using for free',
+    href: '/json-viewer/',
+    highlight: false,
+  },
+  {
+    name: 'Pro',
+    price: '$4.99',
+    period: 'per month',
+    description: 'For teams and individuals who want to save and access their JSON anywhere.',
+    features: [
+      'Everything in Free',
+      'Save JSON documents to the cloud',
+      'Access your saved JSON via a simple REST API',
+      'Priority email support',
+    ],
+    cta: 'Get in touch',
+    href: '/feedback/',
+    highlight: true,
+  },
+];
+---
+
+<PageLayout title="Pricing | RedGreen Studio" description="Simple pricing: free forever, or $4.99/month to save your JSON and access it via API.">
+  <section class="pricing">
+    <div class="pricing-head">
+      <h1>Simple, honest pricing</h1>
+      <p>Use every tool for free. Upgrade only if you need cloud storage and API access.</p>
+    </div>
+
+    <div class="plan-grid">
+      {plans.map((plan) => (
+        <div class:list={['plan', { highlight: plan.highlight }]}>
+          {plan.highlight && <span class="badge">Most flexible</span>}
+          <h2>{plan.name}</h2>
+          <div class="price">
+            <span class="amount">{plan.price}</span>
+            <span class="period">/ {plan.period}</span>
+          </div>
+          <p class="plan-desc">{plan.description}</p>
+          <ul>
+            {plan.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+          <a class="plan-cta" href={plan.href}>{plan.cta}</a>
+        </div>
+      ))}
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .pricing {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .pricing-head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .pricing-head h1 {
+    font-size: 2.2rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .pricing-head p {
+    color: var(--muted-foreground);
+    font-size: 1.05rem;
+  }
+
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .plan {
+    position: relative;
+    border: 1px solid var(--border);
+    background: var(--muted);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .plan.highlight {
+    border-color: var(--green);
+    box-shadow: 0 0 0 1px var(--green);
+  }
+
+  .badge {
+    position: absolute;
+    top: -12px;
+    right: 1.5rem;
+    background: var(--green);
+    color: var(--button-foreground);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  .plan h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.4rem;
+  }
+
+  .price {
+    margin-bottom: 1rem;
+  }
+
+  .amount {
+    font-size: 2.2rem;
+    font-weight: 800;
+  }
+
+  .period {
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+    margin-left: 0.25rem;
+  }
+
+  .plan-desc {
+    color: var(--muted-foreground);
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+  }
+
+  .plan ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .plan li {
+    padding-left: 1.4rem;
+    position: relative;
+    font-size: 0.92rem;
+  }
+
+  .plan li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .plan-cta {
+    margin-top: auto;
+    text-align: center;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--foreground);
+  }
+
+  .plan.highlight .plan-cta {
+    background: var(--green);
+    color: var(--button-foreground);
+    border-color: var(--green);
+  }
+</style>

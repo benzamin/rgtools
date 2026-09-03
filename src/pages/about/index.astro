@@ -1,0 +1,45 @@
+---
+// src/pages/about/index.astro
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout title="About Us | RedGreen Studio" description="RedGreen Studio builds small, focused, privacy-first developer tools.">
+  <section class="about">
+    <h1>About RedGreen Studio</h1>
+    <p>
+      RedGreen Studio started as a small side project: a handful of developer utilities we kept
+      reaching for ourselves — a JSON viewer, a diff checker — built to be fast, free, and
+      completely private.
+    </p>
+    <p>
+      Every tool we ship runs entirely in your browser. There are no accounts required, no
+      tracking of your data, and nothing you paste or upload is ever sent to a server unless you
+      explicitly choose to save it with a Pro plan.
+    </p>
+    <p>
+      We're a tiny, independent team who believes good tools should be simple, honest about what
+      they do, and respectful of your data. Thanks for using what we've built — feedback is
+      always welcome.
+    </p>
+  </section>
+</PageLayout>
+
+<style>
+  .about {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .about h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .about p {
+    color: var(--muted-foreground);
+    line-height: 1.7;
+    font-size: 1.02rem;
+    margin-bottom: 1.25rem;
+  }
+</style>

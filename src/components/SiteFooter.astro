@@ -1,0 +1,52 @@
+---
+// src/components/SiteFooter.astro
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <span>&copy; {year} RedGreen Studio. All rights reserved.</span>
+  <nav class="footer-links">
+    <a href="/about/">About</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/feedback/">Feedback</a>
+  </nav>
+</footer>
+
+<style>
+  .site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 44px;
+    max-height: 50px;
+    padding: 0 1.25rem;
+    background: var(--background, #0a0a0a);
+    border-top: 1px solid var(--border, #262626);
+    font-size: 0.78rem;
+    color: var(--muted-foreground, #a3a3a3);
+    flex-wrap: wrap;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer-links a {
+    color: var(--muted-foreground, #a3a3a3);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: var(--foreground, #ededed);
+  }
+
+  @media (max-width: 480px) {
+    .site-footer {
+      height: auto;
+      max-height: none;
+      padding: 0.5rem 1.25rem;
+    }
+  }
+</style>

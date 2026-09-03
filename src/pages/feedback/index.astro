@@ -1,0 +1,114 @@
+---
+// src/pages/feedback/index.astro
+import PageLayout from '../../layouts/PageLayout.astro';
+const FEEDBACK_EMAIL = 'feedback@redgreen.studio';
+---
+
+<PageLayout title="Feedback | RedGreen Studio" description="Send feedback to the RedGreen Studio team.">
+  <section class="feedback">
+    <h1>Send us feedback</h1>
+    <p>Found a bug, have a feature request, or just want to say hi? Fill this out and it'll open your email client, ready to send.</p>
+
+    <form id="feedback-form" class="feedback-form">
+      <label>
+        Your name
+        <input type="text" name="name" placeholder="Jane Doe" required />
+      </label>
+      <label>
+        Your email
+        <input type="email" name="email" placeholder="jane@example.com" required />
+      </label>
+      <label>
+        Subject
+        <input type="text" name="subject" placeholder="Bug report / feature idea" required />
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="6" placeholder="Tell us what's on your mind..." required></textarea>
+      </label>
+      <button type="submit" class="submit-btn">Send Feedback</button>
+    </form>
+  </section>
+</PageLayout>
+
+<style>
+  .feedback {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .feedback h1 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .feedback > p {
+    color: var(--muted-foreground);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .feedback-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .feedback-form input,
+  .feedback-form textarea {
+    font: inherit;
+    padding: 0.65rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--muted);
+    color: var(--foreground);
+    resize: vertical;
+  }
+
+  .feedback-form input:focus,
+  .feedback-form textarea:focus {
+    outline: 2px solid var(--green);
+    outline-offset: 1px;
+  }
+
+  .submit-btn {
+    align-self: flex-start;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    border: none;
+    background: var(--green);
+    color: var(--button-foreground);
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .submit-btn:hover {
+    opacity: 0.85;
+  }
+</style>
+
+<script define:vars={{ FEEDBACK_EMAIL }}>
+  const form = document.getElementById('feedback-form');
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const name = data.get('name') || '';
+    const email = data.get('email') || '';
+    const subject = data.get('subject') || 'RedGreen Studio Feedback';
+    const message = data.get('message') || '';
+
+    const body = `From: ${name} (${email})\n\n${message}`;
+    const mailto = `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  });
+</script>

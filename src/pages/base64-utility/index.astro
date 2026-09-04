@@ -1,0 +1,19 @@
+---
+import Base64Utility from '../../components/Base64Utility.jsx';
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Base64 Encode & Decode | Client-Side Tool" description="Encode and decode Base64 text securely in your browser.">
+  <div class="base64-page">
+    <Base64Utility client:load />
+  </div>
+</PageLayout>
+
+<style>
+  .base64-page {
+    width: 100%;
+    min-height: calc(100vh - 8rem);
+    margin: 0;
+    padding: 2rem 1rem;
+  }
+</style>

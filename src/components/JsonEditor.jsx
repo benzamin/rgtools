@@ -27,20 +27,24 @@ export default function JsonEditor() {
   const rightEditorRef = useRef(null);
   const leftContentRef = useRef(null);
   const rightContentRef = useRef(null);
-  const [leftMode, setLeftMode] = useState('tree');
+  const isMirroringRef = useRef(true);
+  const [leftMode, setLeftMode] = useState('text');
   const [rightMode, setRightMode] = useState('tree');
   const [leftPaneWidth, setLeftPaneWidth] = useState(50);
+  const [isMirroring, setIsMirroring] = useState(true);
 
   const initialJson = {
-    appName: "DevToolHub",
+    appName: "RedGreen Studio",
     version: "1.0.0",
-    features: ["JSON Diff", "JSON Viewer", "XML Converter"],
+    active: true,
+    features: ["JSON Fixer", "Local JSON Viewer", "JSON Sorting", "JSON Formatter", "JSON Search"],
     settings: {
+      left_right_mirror: true,
       theme: "light",
       autoFormat: true,
-      maxHistory: 50
     },
-    active: true
+    daysActive: Math.floor(Math.abs(new Date() - new Date('2016-07-21')) / 86400000),
+    
   };
 
   const applyEditorTheme = () => {
@@ -56,9 +60,10 @@ export default function JsonEditor() {
       target: leftContainerRef.current,
       props: {
         content: { json: initialJson },
-        mode: 'tree',
+        mode: 'text',
         onChange: (content) => {
           leftContentRef.current = content;
+          if (isMirroringRef.current) setPaneContent('right', content, false);
         }
       }
     });
@@ -66,14 +71,15 @@ export default function JsonEditor() {
     rightEditorRef.current = new JSONEditor({
       target: rightContainerRef.current,
       props: {
-        content: { json: {} },
+        content: { json: initialJson },
         mode: 'tree',
         onChange: (content) => {
           rightContentRef.current = content;
+          if (isMirroringRef.current) setPaneContent('left', content, false);
         }
       }
     });
-    rightContentRef.current = { json: {} };
+    rightContentRef.current = { json: initialJson };
 
     return () => {
       leftEditorRef.current?.destroy();
@@ -104,11 +110,23 @@ export default function JsonEditor() {
     editor?.updateProps({ mode: newMode });
   };
 
-  const setPaneContent = (pane, content) => {
+  const setPaneContent = (pane, content, mirror = isMirroringRef.current) => {
     const editor = pane === 'left' ? leftEditorRef.current : rightEditorRef.current;
     const contentRef = pane === 'left' ? leftContentRef : rightContentRef;
     contentRef.current = content;
     editor?.updateProps({ content });
+
+    if (mirror) {
+      setPaneContent(pane === 'left' ? 'right' : 'left', content, false);
+    }
+  };
+
+  const handleMirrorChange = (event) => {
+    const nextIsMirroring = event.currentTarget.checked;
+    isMirroringRef.current = nextIsMirroring;
+    setIsMirroring(nextIsMirroring);
+
+    if (nextIsMirroring) setPaneContent('right', leftContentRef.current ?? { json: {} }, false);
   };
 
   const handleNew = (pane) => setPaneContent(pane, { json: {} });
@@ -170,16 +188,24 @@ export default function JsonEditor() {
   };
 
   return (
-    <div ref={shellRef} style={{ height: '100%', minHeight: 0 }}>
+    <div ref={shellRef} style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', minHeight: '44px', border: '1px solid var(--border)', borderBottom: 0, borderRadius: '6px 6px 0 0', background: 'var(--surface)' }}>
+        <h1 style={{ gridColumn: 2, margin: 0, fontSize: '1.15rem', textAlign: 'center' }}>Json Viewer</h1>
+        <label style={{ gridColumn: 3, justifySelf: 'end', display: 'inline-flex', alignItems: 'center', gap: '0.45rem', marginRight: '0.75rem', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+          <span>Mirror</span>
+          <input type="checkbox" checked={isMirroring} onChange={handleMirrorChange} />
+        </label>
+      </div>
       <div
         ref={workspaceRef}
         style={{
           display: 'grid',
           gridTemplateColumns: `${leftPaneWidth}% 10px minmax(0, 1fr)`,
-          height: '100%',
+          flex: '1 1 0',
+          minHeight: 0,
           width: '100%',
           border: '1px solid var(--border)',
-          borderRadius: '6px',
+          borderRadius: '0 0 6px 6px',
           overflow: 'hidden'
         }}
       >

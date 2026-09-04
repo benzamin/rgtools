@@ -293,7 +293,7 @@ export default function DiffViewer() {
   }, []);
 
   return (
-    <div className="diff-viewer" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', border: '1px solid #d1d5db', borderRadius: '16px', padding: '1rem', background: 'var(--background)' }}>
+    <div className="diff-viewer" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
       {/* Controls Bar */}
       <div className="diff-viewer-header">
         <span className="diff-viewer-title">Diff Viewer</span>

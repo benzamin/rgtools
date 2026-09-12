@@ -1,6 +1,7 @@
 // src/components/DiffViewer.jsx
-import { diffLines } from 'diff';
+import { createTwoFilesPatch, diffLines } from 'diff';
 import 'diff2html/bundles/css/diff2html.min.css';
+import { html as diff2html } from 'diff2html';
 import { jsPDF } from 'jspdf';
 import { useEffect, useRef, useState } from 'preact/hooks';
 
@@ -18,7 +19,6 @@ export default function DiffViewer() {
   const [isSavingPdf, setIsSavingPdf] = useState(false);
   const [pdfError, setPdfError] = useState('');
   const [textareaHeight, setTextareaHeight] = useState(220);
-  const workerRef = useRef(null);
   const requestIdRef = useRef(0);
   const originalTextareaRef = useRef(null);
   const modifiedTextareaRef = useRef(null);
@@ -214,21 +214,6 @@ export default function DiffViewer() {
     pdf.setTextColor(0, 0, 0);
   };
 
-  useEffect(() => {
-    const worker = new Worker(new URL('./diff-worker.js', import.meta.url), { type: 'module' });
-    workerRef.current = worker;
-    worker.onmessage = ({ data }) => {
-      if (data.id === requestIdRef.current) {
-        setDiffHtml(data.diffHtml);
-        requestAnimationFrame(() => {
-          if (data.id === requestIdRef.current) setIsDiffing(false);
-        });
-      }
-    };
-
-    return () => worker.terminate();
-  }, []);
-
   const handleSavePdf = async () => {
     setPdfError('');
     if (getDiffLineCount() > PDF_DOWNLOAD_LINE_LIMIT) {
@@ -268,7 +253,25 @@ export default function DiffViewer() {
     setIsDiffing(true);
     setPdfError('');
     const timeoutId = window.setTimeout(() => {
-      workerRef.current?.postMessage({ requestId, id: requestId, originalText, modifiedText, outputFormat });
+      try {
+        const contextLineCount = Math.max(originalText.split('\n').length, modifiedText.split('\n').length);
+        const patch = createTwoFilesPatch('Original', 'Modified', originalText, modifiedText, '', '', { context: contextLineCount });
+        const nextDiffHtml = diff2html(patch, {
+          inputFormat: 'diff',
+          outputFormat,
+          drawFileList: false,
+          matching: 'lines'
+        });
+        if (requestId === requestIdRef.current) {
+          setDiffHtml(nextDiffHtml);
+          setIsDiffing(false);
+        }
+      } catch {
+        if (requestId === requestIdRef.current) {
+          setDiffHtml('<div class="error">Invalid input data for diff generation.</div>');
+          setIsDiffing(false);
+        }
+      }
     }, 200);
 
     return () => window.clearTimeout(timeoutId);

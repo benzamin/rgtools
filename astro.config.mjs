@@ -6,9 +6,13 @@ import starlightThemeBlack from 'starlight-theme-black';
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://www.example.com",
-    // base: "/src",
-    trailingSlash: "always",
+    site: "https://redgreen.studio",
+    //base: "/src",
+    trailingSlash: "never",
+    build: {
+        // Example: Generate `page.html` instead of `page/index.html` during build.
+        format: 'file' //https://docs.astro.build/en/reference/configuration-reference/#buildformat
+    },
     integrations: [starlight({
         plugins: [
             starlightThemeBlack({

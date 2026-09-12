@@ -1,0 +1,32 @@
+---
+// src/pages/qr/index.astro
+import QrGenerator from '../../components/QrGenerator.jsx';
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Online QR Code Generator | Client-Side Tool" description="Generate a QR code from any text entirely in your browser. Fast, free, and secure.">
+  <div class="qr-page">
+
+    <div class="qr-body">
+      {/* Astro hydrates this interactive element dynamically on load */}
+      <QrGenerator client:load />
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .qr-page {
+    width: 100%;
+    margin: 0;
+    padding: 2rem 1rem;
+  }
+
+  .qr-header {
+    margin-bottom: 2rem;
+  }
+
+  .qr-header h1 {
+    margin: 0;
+    font-size: 1.75rem;
+  }
+</style>

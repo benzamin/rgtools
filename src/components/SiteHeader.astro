@@ -2,6 +2,7 @@
 // src/components/SiteHeader.astro
 // Thin, shared title bar used across the homepage and every tool page.
 import logo from '../assets/redgreen-logo.png';
+import coffeeImage from '../assets/buy-me-a-cofee.png';
 const { image } = Astro.props;
 ---
 
@@ -13,6 +14,17 @@ const { image } = Astro.props;
     </span>
   </a>
 
+  
+  <a class="coffee-link" href="https://www.buymeacoffee.com/benzamin" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee"  ></a>  
+
+  <nav class="quick-links" aria-label="Quick links">
+    <a href="/json/">JSON</a>
+    <a href="/diff/">DIFF</a>
+    <a href="/base64/">BASE64</a>
+    <a href="/jwt/">JWT</a>
+    <a href="/qr/">QR</a>
+  </nav>
+
   <div class="header-controls">
     <nav class="site-nav" id="site-nav">
       <div class="nav-item has-dropdown">
@@ -21,21 +33,25 @@ const { image } = Astro.props;
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="dropdown-menu">
-          <a href="/json-viewer/" class="dropdown-link">
+          <a href="/json/" class="dropdown-link">
             <strong>JSON Viewer</strong>
             <span>View, validate &amp; edit JSON</span>
           </a>
-          <a href="/diff-finder/" class="dropdown-link">
+          <a href="/diff/" class="dropdown-link">
             <strong>Diff Checker</strong>
             <span>Compare text &amp; export to PDF</span>
           </a>
-          <a href="/base64-utility/" class="dropdown-link">
+          <a href="/base64/" class="dropdown-link">
             <strong>Base64 Utility</strong>
             <span>Encode &amp; decode text</span>
           </a>
-          <a href="/qr-generator/" class="dropdown-link">
+          <a href="/qr/" class="dropdown-link">
             <strong>QR Generator</strong>
             <span>Generate QR codes from text</span>
+          </a>
+          <a href="/jwt/" class="dropdown-link">
+            <strong>JWT Utility</strong>
+            <span>Decode &amp; verify tokens locally</span>
           </a>
         </div>
       </div>
@@ -101,11 +117,60 @@ const { image } = Astro.props;
   .brand-green { color: var(--red, #dc2626); }
   .brand-studio { color: var(--foreground, #ededed); font-weight: 600; }
 
+  .coffee-link {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 120px;
+    width: 220px;
+    margin-left: 30px;
+    padding: 0.25rem;
+  }
+
+  .coffee-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   .header-controls {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-left: auto;
+  }
+
+  .quick-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    max-width: calc(100% - 25rem);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .quick-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .quick-links a {
+    flex: 0 0 auto;
+    padding: 0.3rem 0.55rem;
+    color: var(--foreground, #ededed);
+    border: 1px solid var(--border, #262626);
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+
+  .quick-links a:hover {
+    background: var(--muted, #171717);
+    border-color: var(--muted-foreground, #a3a3a3);
   }
 
   .site-nav {
@@ -233,6 +298,15 @@ const { image } = Astro.props;
   }
 
   @media (max-width: 720px) {
+    .quick-links {
+      position: static;
+      transform: none;
+      flex: 1;
+      justify-content: flex-start;
+      min-width: 0;
+      max-width: none;
+    }
+
     .nav-toggle {
       display: flex;
     }

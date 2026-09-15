@@ -1,9 +1,22 @@
 ---
 import JwtUtility from '../../components/JwtUtility.jsx';
 import PageLayout from '../../layouts/PageLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'JWT Decoder & Verifier',
+  operatingSystem: 'All',
+  applicationCategory: 'DeveloperApplication',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
 ---
 
-<PageLayout title="JWT Utility | Client-Side Tool" description="Decode and verify JSON Web Tokens entirely in your browser.">
+<PageLayout title="JWT Utility | Client-Side Tool" description="Free online client-side JWT Decoder & Verifier. Fast, responsive, and 100% private. No data is ever sent to a server." schema={schema}>
   <div class="jwt-page">
     <JwtUtility client:load />
 

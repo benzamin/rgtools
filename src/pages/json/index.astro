@@ -2,9 +2,22 @@
 // src/pages/json/index.astro
 import JsonEditor from '../../components/JsonEditor.jsx';
 import PageLayout from '../../layouts/PageLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'JSON Viewer & Editor',
+  operatingSystem: 'All',
+  applicationCategory: 'DeveloperApplication',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
 ---
 
-<PageLayout title="Online JSON Viewer & Editor | Client-Side Tool" description="View, edit, fold, format, and validate JSON data in a interactive tree view right in your browser. 100% private and client-side.">
+<PageLayout title="Online JSON Viewer & Editor | Client-Side Tool" description="Free online client-side JSON Viewer & Editor. Fast, responsive, and 100% private. No data is ever sent to a server." schema={schema}>
   <div class="json-page">
     <main class="json-main">
       {/* Astro hydrates the editor component on page load */}

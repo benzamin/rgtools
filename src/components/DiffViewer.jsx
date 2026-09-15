@@ -1,12 +1,12 @@
 // src/components/DiffViewer.jsx
 import { createTwoFilesPatch, diffLines } from 'diff';
-import 'diff2html/bundles/css/diff2html.min.css';
 import { html as diff2html } from 'diff2html';
+import 'diff2html/bundles/css/diff2html.min.css';
 import { jsPDF } from 'jspdf';
 import { useEffect, useRef, useState } from 'preact/hooks';
 
-const PDF_DOWNLOAD_LINE_LIMIT = 500;
-const PDF_DOWNLOAD_LIMIT_MESSAGE = 'Free version supports max 500 lines of PDF download';
+const PDF_DOWNLOAD_LINE_LIMIT = 1000;
+const PDF_DOWNLOAD_LIMIT_MESSAGE = 'Free version supports max 1000 lines of PDF download';
 
 const getTextLineCount = (text) => (text ? text.split('\n').length : 0);
 

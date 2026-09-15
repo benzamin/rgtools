@@ -2,9 +2,34 @@
 // src/pages/qr/index.astro
 import QrGenerator from '../../components/QrGenerator.jsx';
 import PageLayout from '../../layouts/PageLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'QR Code Generator',
+  operatingSystem: 'All',
+  applicationCategory: 'DeveloperApplication',
+  featureList: [
+    'Website URL QR code template',
+    'WiFi connectivity QR code template',
+    'vCard/contact card QR code template',
+    'WhatsApp chat QR code template',
+    'Email QR code template',
+    'Phone number QR code template',
+    'SMS QR code template',
+    'Calendar event QR code template',
+    'Geo-location QR code template',
+    'PNG download',
+  ],
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
 ---
 
-<PageLayout title="Online QR Code Generator | Client-Side Tool" description="Generate a QR code from any text entirely in your browser. Fast, free, and secure.">
+<PageLayout title="Online QR Code Generator | Client-Side Tool" description="Free online client-side QR Code Generator. Fast, responsive, and 100% private. No data is ever sent to a server." schema={schema}>
   <div class="qr-page">
 
     <div class="qr-body">

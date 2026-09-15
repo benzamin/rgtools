@@ -4,16 +4,26 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
-const { title = 'RedGreen Studio', description = 'RedGreen Studio — simple, private, client-side developer tools.' } = Astro.props;
+const { title = 'RedGreen Studio', description = 'RedGreen Studio — simple, private, client-side developer tools.', schema } = Astro.props;
 ---
 
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-84R3QXPST4"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-84R3QXPST4');
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
     <script is:inline>
       (() => {
         const storageKey = 'redgreen-theme';

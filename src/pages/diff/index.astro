@@ -15,6 +15,25 @@ import PageLayout from '../../layouts/PageLayout.astro';
       {/* Astro hydrates this interactive element dynamically on load */}
       <DiffViewer client:load />
     </div>
+
+    <section class="json-utility-faq" aria-labelledby="json-utility-faq-title">
+      <h2 id="json-utility-faq-title">FAQ: Diff Finder</h2>
+      <ol>
+        <li>The diff updates in real time as you type in either panel, so changes are compared immediately.</li>
+        <li>All comparison work is calculated offline in your browser, keeping your JSON and text private.</li>
+        <li>Paste JSON, code, configuration, logs, or plain text into the left and right panels to compare versions quickly.</li>
+        <li>Use side-by-side diff when you want to scan original and modified content in parallel columns.</li>
+        <li>Use inline diff when you prefer a compact single-column view that highlights additions and removals in sequence.</li>
+        <li>The highlighted output makes inserted, deleted, and unchanged lines easier to review before sharing.</li>
+        <li>Download the diff as a PDF to save a snapshot of changes for documentation, review, or later check back.</li>
+        <li>PDF export is useful when you need to send differences to a teammate without asking them to rerun the comparison.</li>
+        <li>Switch between side-by-side and inline output anytime to choose the clearest view for the data you are checking.</li>
+        <li>Because the diff is generated locally, you can review sensitive changes without uploading the content to a server.</li>
+      </ol>
+      <p>
+        If you want to report any bug or place a feature request, feel free to send <a href="/feedback/">Feedback</a> or drop us an email at <a href="mailto:rgstudio@gmail.com">rgstudiobd@gmail.com</a>
+      </p>
+    </section>
   </div>
 </PageLayout>
 
@@ -38,5 +57,35 @@ import PageLayout from '../../layouts/PageLayout.astro';
   .diff-header p {
     color: var(--muted-foreground);
     margin: 0;
+  }
+
+  .json-utility-faq {
+    max-width: 920px;
+    margin: 3rem auto 1rem;
+    padding: 0 0.25rem;
+    line-height: 1.65;
+  }
+
+  .json-utility-faq h2 {
+    margin: 0 0 1rem;
+    font-size: 1.65rem;
+  }
+
+  .json-utility-faq ol {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding-left: 1.35rem;
+    color: var(--muted-foreground);
+  }
+
+  .json-utility-faq p {
+    margin: 1.4rem 0 0;
+    color: var(--muted-foreground);
+  }
+
+  .json-utility-faq a {
+    color: var(--green);
+    font-weight: 700;
   }
 </style>

@@ -11,6 +11,25 @@ import PageLayout from '../../layouts/PageLayout.astro';
       <JsonEditor client:load />
     </main>
   </div>
+
+  <section class="json-utility-faq" aria-labelledby="json-utility-faq-title">
+    <h2 id="json-utility-faq-title">FAQ: JSON Utility</h2>
+    <ol>
+      <li>All JSON viewing and editing runs in your browser, so your data stays on your device.</li>
+      <li>Use text, code, and table-style views to inspect structured data in the format that fits the task.</li>
+      <li>Sort JSON keys to make objects easier to scan before comparing, saving, or sharing them.</li>
+      <li>Search inside large JSON documents to jump directly to matching keys, values, or nested content.</li>
+      <li>Collapse and expand objects or arrays to focus on the part of the JSON tree you are reviewing.</li>
+      <li>Mirror data when you want to start from the same JSON and review edits side by side.</li>
+      <li>Transform JSON in the editor to clean, reformat, or reshape data without leaving the page.</li>
+      <li>Use the tree mode context menu for quick actions on nodes, values, arrays, and objects.</li>
+      <li>Create a new document, open an existing JSON file, save your work, and keep local workflows moving.</li>
+      <li>Copy content to the left panel or copy content to the right panel when you need to align inputs quickly.</li>
+    </ol>
+    <p>
+      If you want to report any bug or place a feature request, feel free to send <a href="/feedback/">Feedback</a> or drop us an email at <a href="mailto:rgstudio@gmail.com">rgstudiobd@gmail.com</a>
+    </p>
+  </section>
 </PageLayout>
 
 <style>
@@ -31,5 +50,35 @@ import PageLayout from '../../layouts/PageLayout.astro';
   .json-main :global(.jse-main) {
     font-family: monospace;
     height: 100%;
+  }
+
+  .json-utility-faq {
+    max-width: 920px;
+    margin: 3rem auto 4rem;
+    padding: 0 1rem;
+    line-height: 1.65;
+  }
+
+  .json-utility-faq h2 {
+    margin: 0 0 1rem;
+    font-size: 1.65rem;
+  }
+
+  .json-utility-faq ol {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding-left: 1.35rem;
+    color: var(--muted-foreground);
+  }
+
+  .json-utility-faq p {
+    margin: 1.4rem 0 0;
+    color: var(--muted-foreground);
+  }
+
+  .json-utility-faq a {
+    color: var(--green);
+    font-weight: 700;
   }
 </style>

@@ -1,15 +1,15 @@
 ---
 // src/pages/feedback/index.astro
 import PageLayout from '../../layouts/PageLayout.astro';
-const FEEDBACK_EMAIL = 'feedback@redgreen.studio';
 ---
 
 <PageLayout title="Feedback | RedGreen Studio" description="Send feedback to the RedGreen Studio team.">
   <section class="feedback">
     <h1>Send us feedback</h1>
-    <p>Found a bug, have a feature request, or just want to say hi? Fill this out and it'll open your email client, ready to send.</p>
+    <p>Found a bug, have a feature request, or just want to say hi? Send us a message.</p>
 
-    <form id="feedback-form" class="feedback-form">
+    <form class="feedback-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="035e8e00-7080-4807-8818-7eff5a6f7b1d" />
       <label>
         Your name
         <input type="text" name="name" placeholder="Jane Doe" required />
@@ -17,10 +17,6 @@ const FEEDBACK_EMAIL = 'feedback@redgreen.studio';
       <label>
         Your email
         <input type="email" name="email" placeholder="jane@example.com" required />
-      </label>
-      <label>
-        Subject
-        <input type="text" name="subject" placeholder="Bug report / feature idea" required />
       </label>
       <label>
         Message
@@ -96,19 +92,3 @@ const FEEDBACK_EMAIL = 'feedback@redgreen.studio';
     opacity: 0.85;
   }
 </style>
-
-<script define:vars={{ FEEDBACK_EMAIL }}>
-  const form = document.getElementById('feedback-form');
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const name = data.get('name') || '';
-    const email = data.get('email') || '';
-    const subject = data.get('subject') || 'RedGreen Studio Feedback';
-    const message = data.get('message') || '';
-
-    const body = `From: ${name} (${email})\n\n${message}`;
-    const mailto = `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-  });
-</script>

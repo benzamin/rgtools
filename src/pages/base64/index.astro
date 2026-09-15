@@ -6,6 +6,25 @@ import PageLayout from '../../layouts/PageLayout.astro';
 <PageLayout title="Base64 Encode & Decode | Client-Side Tool" description="Encode and decode Base64 text securely in your browser.">
   <div class="base64-page">
     <Base64Utility client:load />
+
+    <section class="base64-utility-faq" aria-labelledby="base64-utility-faq-title">
+      <h2 id="base64-utility-faq-title">FAQ: Base64 Utility</h2>
+      <ol>
+        <li>Base64 encoding updates in real time as you type, so you can see the encoded output immediately.</li>
+        <li>Base64 decoding also runs instantly, making it quick to verify or inspect encoded text.</li>
+        <li>All encode and decode calculations happen offline in your browser for better security and privacy.</li>
+        <li>Your input is not uploaded to a server, which is useful when working with private tokens, snippets, or internal data.</li>
+        <li>Use Base64 encoding to prepare text for APIs, configuration values, data URLs, or systems that expect encoded strings.</li>
+        <li>Decode Base64 strings to inspect payloads, debug API responses, review copied data, or check integration output.</li>
+        <li>Base64 is helpful for safely moving text through formats that may not handle raw binary or special characters well.</li>
+        <li>Developers can use it to inspect JWT parts, basic auth values, serialized settings, and other encoded application data.</li>
+        <li>The tool is designed for quick copy, paste, encode, decode, and compare workflows without leaving the page.</li>
+        <li>Because it works locally, you can use it for everyday development checks without exposing sensitive content.</li>
+      </ol>
+      <p>
+        If you want to report any bug or place a feature request, feel free to send <a href="/feedback/">Feedback</a> or drop us an email at <a href="mailto:rgstudio@gmail.com">rgstudiobd@gmail.com</a>
+      </p>
+    </section>
   </div>
 </PageLayout>
 
@@ -15,5 +34,35 @@ import PageLayout from '../../layouts/PageLayout.astro';
     min-height: calc(100vh - 8rem);
     margin: 0;
     padding: 2rem 1rem;
+  }
+
+  .base64-utility-faq {
+    max-width: 920px;
+    margin: 3rem auto 1rem;
+    padding: 0 0.25rem;
+    line-height: 1.65;
+  }
+
+  .base64-utility-faq h2 {
+    margin: 0 0 1rem;
+    font-size: 1.65rem;
+  }
+
+  .base64-utility-faq ol {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding-left: 1.35rem;
+    color: var(--muted-foreground);
+  }
+
+  .base64-utility-faq p {
+    margin: 1.4rem 0 0;
+    color: var(--muted-foreground);
+  }
+
+  .base64-utility-faq a {
+    color: var(--green);
+    font-weight: 700;
   }
 </style>

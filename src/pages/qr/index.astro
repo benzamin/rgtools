@@ -11,6 +11,26 @@ import PageLayout from '../../layouts/PageLayout.astro';
       {/* Astro hydrates this interactive element dynamically on load */}
       <QrGenerator client:load />
     </div>
+
+    <section class="qr-utility-faq" aria-labelledby="qr-utility-faq-title">
+      <h2 id="qr-utility-faq-title">FAQ: QR Code Generator</h2>
+      <ol>
+        <li>Type or paste any text into the input panel and the QR code updates automatically after a short delay.</li>
+        <li>The generator works well for plain text, links, contact details, messages, locations, events, and other scannable content.</li>
+        <li>The main feature is Add Template, which helps create correctly formatted QR content without memorizing special QR syntax.</li>
+        <li>The Website template turns a URL into a QR code that opens the site when scanned.</li>
+        <li>The Connect WiFi template creates a QR code that can let phones join a network using the SSID, password, and security type.</li>
+        <li>The vCard/Contact template packages a person's name, phone, and email so scanners can add the contact quickly.</li>
+        <li>The WhatsApp, Email, Phone Number, and SMS templates generate action links for starting a chat, composing an email, making a call, or preparing a text message.</li>
+        <li>The Calendar template creates event details that compatible scanner apps can add to a calendar.</li>
+        <li>The Geo-location template stores latitude, longitude, and a label so scanners can open a mapped place.</li>
+        <li>Generated QR codes can be downloaded as PNG images and used on pages, flyers, labels, presentations, or support materials.</li>
+        <li>Most modern iOS and Android phone camera apps can scan QR codes directly and interpret supported templates without needing a separate scanner app.</li>
+      </ol>
+      <p>
+        If you want to report any bug or place a feature request, feel free to send <a href="/feedback/">Feedback</a> or drop us an email at <a href="mailto:rgstudio@gmail.com">rgstudiobd@gmail.com</a>
+      </p>
+    </section>
   </div>
 </PageLayout>
 
@@ -28,5 +48,35 @@ import PageLayout from '../../layouts/PageLayout.astro';
   .qr-header h1 {
     margin: 0;
     font-size: 1.75rem;
+  }
+
+  .qr-utility-faq {
+    max-width: 920px;
+    margin: 3rem auto 1rem;
+    padding: 0 0.25rem;
+    line-height: 1.65;
+  }
+
+  .qr-utility-faq h2 {
+    margin: 0 0 1rem;
+    font-size: 1.65rem;
+  }
+
+  .qr-utility-faq ol {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding-left: 1.35rem;
+    color: var(--muted-foreground);
+  }
+
+  .qr-utility-faq p {
+    margin: 1.4rem 0 0;
+    color: var(--muted-foreground);
+  }
+
+  .qr-utility-faq a {
+    color: var(--green);
+    font-weight: 700;
   }
 </style>

@@ -4,5 +4,66 @@ import PageLayout from '../../layouts/PageLayout.astro';
 ---
 
 <PageLayout title="JWT Utility | Client-Side Tool" description="Decode and verify JSON Web Tokens entirely in your browser.">
-  <JwtUtility client:load />
+  <div class="jwt-page">
+    <JwtUtility client:load />
+
+    <section class="jwt-utility-faq" aria-labelledby="jwt-utility-faq-title">
+      <h2 id="jwt-utility-faq-title">FAQ: JWT Utility</h2>
+      <ol>
+        <li>A JSON Web Token is a compact signed token commonly used to pass claims between services, APIs, and browser applications.</li>
+        <li>JWTs have three dot-separated parts: header, payload, and signature, usually shown as <code>xxxxx.yyyyy.zzzzz</code>.</li>
+        <li>The header describes the token type and signing algorithm, the payload contains claims, and the signature proves whether the token matches the key used to sign it.</li>
+        <li>This utility can encode new JWTs, decode existing JWTs, inspect header and payload JSON, and show claims in a readable table view.</li>
+        <li>Signature verification can check whether a token is valid when you provide the matching secret or public key.</li>
+        <li>Commonly used algorithms include HS256, HS384, HS512, RS256, RS384, RS512, PS256, PS384, PS512, ES256, ES384, ES512, and EdDSA.</li>
+        <li>HMAC algorithms use a shared secret, while RSA, RSA-PSS, ECDSA, and EdDSA workflows use private keys for signing and public keys for verification.</li>
+        <li>Use this tool to debug authentication headers, inspect API tokens, review expiration and issued-at claims, or verify test tokens during development.</li>
+        <li>The encoder is useful for generating sample tokens when testing backend auth flows, frontend guards, or API client integrations.</li>
+        <li>All decoding, encoding, and verification work runs in your browser, helping you inspect sensitive tokens without uploading them to a server.</li>
+      </ol>
+      <p>
+        If you want to report any bug or place a feature request, feel free to send <a href="/feedback/">Feedback</a> or drop us an email at <a href="mailto:rgstudio@gmail.com">rgstudiobd@gmail.com</a>
+      </p>
+    </section>
+  </div>
 </PageLayout>
+
+<style>
+  .jwt-page {
+    width: 100%;
+  }
+
+  .jwt-utility-faq {
+    max-width: 920px;
+    margin: 0 auto 4rem;
+    padding: 0 1rem;
+    line-height: 1.65;
+  }
+
+  .jwt-utility-faq h2 {
+    margin: 0 0 1rem;
+    font-size: 1.65rem;
+  }
+
+  .jwt-utility-faq ol {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding-left: 1.35rem;
+    color: var(--muted-foreground);
+  }
+
+  .jwt-utility-faq code {
+    color: var(--foreground);
+  }
+
+  .jwt-utility-faq p {
+    margin: 1.4rem 0 0;
+    color: var(--muted-foreground);
+  }
+
+  .jwt-utility-faq a {
+    color: var(--green);
+    font-weight: 700;
+  }
+</style>
